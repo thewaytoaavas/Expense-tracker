@@ -34,18 +34,23 @@ router.post("/login", async (req, res) => {
     const user = await findUser({ email, password });
 
     if (user?._id) {
+      user.password = undefined;
       return res.json({
         status: "success",
         message: "user login successfully",
-        user: user,
+        user,
       });
     }
 
-    return res.json({
+    res.json({
       status: "error",
       message: "Invalid cediantials",
     });
   } catch (error) {}
 });
+
+//delete user.password
+
+//const {password, ---restUser} = user
 
 export default router;
